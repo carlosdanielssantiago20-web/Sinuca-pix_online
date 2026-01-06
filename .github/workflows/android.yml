@@ -1,0 +1,30 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Godot
+        uses: firebelley/setup-godot@v1
+        with:
+          version: 4.2.1
+          use-dotnet: false
+
+      - name: Export APK
+        run: |
+          mkdir -p build
+          godot --headless --export-release "Android" build/SinucaPix.apk
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: SinucaPix-APK
+          path: build/SinucaPix.apk
