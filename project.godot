@@ -1,0 +1,3 @@
+[application]
+config/name="Sinuca Pix Online"
+run/main_scene="res://main.tscn"
